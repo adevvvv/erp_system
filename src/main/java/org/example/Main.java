@@ -3,54 +3,70 @@ package org.example;
 import org.example.animals.*;
 import org.example.care.*;
 import org.example.employees.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Демонстрация классов сотрудников.
- * Принцип DIP: сотрудники зависят от абстракций.
- * Принцип LSP: наследники заменяют родительский класс.
+ * Главный класс для демонстрации работы ERP-системы Московского зоопарка.
+ * Демонстрирует применение всех SOLID принципов и принципов ООП.
+ * Полная интеграция всех компонентов системы.
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== СОЗДАНИЕ КЛАССОВ СОТРУДНИКОВ ===");
+        System.out.println("=".repeat(60));
+        System.out.println("ERP-СИСТЕМА МОСКОВСКОГО ЗООПАРКА");
+        System.out.println("=".repeat(60));
+        System.out.println("Демонстрация применения SOLID принципов\n");
 
-        // Создание животных и сервисов
         Animal lion = new Lion("Симба");
         Animal parrot = new Parrot("Кеша");
+        Animal snake = new Snake("Каа");
+
+        List<Animal> allAnimals = new ArrayList<>();
+        allAnimals.add(lion);
+        allAnimals.add(parrot);
+        allAnimals.add(snake);
+
+        System.out.println("Создано животных: " + allAnimals.size());
 
         AnimalCare feedingService = new FeedingService();
         AnimalCare medicalService = new MedicalCheckupService();
         AnimalCare cleaningService = new CleaningService();
 
-        // Создание сотрудников
-        Veterinarian veterinarian = new Veterinarian("Доктор Айболит");
-        Zookeeper zookeeper = new Zookeeper("Иван Петров");
+        System.out.println("Созданы сервисы:");
+        System.out.println(feedingService.getCareType() + " - кормление");
+        System.out.println(medicalService.getCareType() + " - медосмотр");
+        System.out.println(cleaningService.getCareType() + " - уборка");
 
-        System.out.println("\nСозданы сотрудники:");
-        System.out.println("1. " + veterinarian.getPosition() + " " + veterinarian.getName());
-        System.out.println("   - Специализация: " + veterinarian.getSpecialization());
+        Employee veterinarian = new Veterinarian("Доктор Айболит");
+        Employee zookeeper = new Zookeeper("Иван Петров");
+        Employee intern = new Zookeeper("Петя Стажер");
 
-        System.out.println("\n2. " + zookeeper.getPosition() + " " + zookeeper.getName());
-        System.out.println("   - Зона ответственности: " + zookeeper.getResponsibilityZone());
+        System.out.println("Созданы сотрудники:");
+        System.out.println(veterinarian.getPosition() + " " + veterinarian.getName());
+        System.out.println(zookeeper.getPosition() + " " + zookeeper.getName());
+        System.out.println(intern.getPosition() + " " + intern.getName());
 
-        System.out.println("\n--- Работа сотрудников ---");
+        System.out.println("\n--- Утренние процедуры ---");
 
-        System.out.println("\n1. Ветеринар проводит медосмотр:");
-        veterinarian.performDuty(lion, medicalService);
-
-        System.out.println("\n2. Ветеринар кормит животное:");
-        veterinarian.performDuty(parrot, feedingService);
-
-        System.out.println("\n3. Смотритель кормит животное:");
-        zookeeper.performDuty(lion, feedingService);
-
-        System.out.println("\n4. Смотритель убирает вольер:");
-        zookeeper.performDuty(parrot, cleaningService);
-
-        System.out.println("Можем работать с сотрудниками через родительский класс:");
-
-        Employee[] employees = { veterinarian, zookeeper };
-        for (Employee emp : employees) {
-            System.out.println("\n" + emp.getPosition() + " " + emp.getName() + " работает:");
-            emp.performDuty(lion, medicalService);
+        System.out.println("\nЖивотные просыпаются:");
+        for (Animal animal : allAnimals) {
+            animal.makeSound();
         }
+
+        System.out.println("\nМЕДОСМОТР:");
+        for (Animal animal : allAnimals) {
+            veterinarian.performDuty(animal, medicalService);
+        }
+
+        System.out.println("\nКОРМЛЕНИЕ:");
+
+        zookeeper.performDuty(lion, feedingService);
+        zookeeper.performDuty(parrot, feedingService);
+        zookeeper.performDuty(snake, feedingService);
+
+        System.out.println("\nУБОРКА:");
+        intern.performDuty(lion, cleaningService);
+        intern.performDuty(parrot, cleaningService);
     }
 }
