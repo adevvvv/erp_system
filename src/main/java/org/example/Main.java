@@ -4,36 +4,42 @@ import org.example.animals.*;
 import org.example.care.*;
 
 /**
- * Демонстрация сервисов ухода.
- * Принцип SRP: каждый сервис имеет одну ответственность.
- * Принцип DIP: сервисы реализуют интерфейс AnimalCare.
+ * Демонстрация всех сервисов ухода.
+ * Принцип OCP: добавление новых сервисов без изменений.
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== СОЗДАНИЕ СЕРВИСОВ УХОДА ===");
+        System.out.println("=== ДЕМОНСТРАЦИЯ СЕРВИСОВ УХОДА ===");
 
         // Создание животных
         Animal lion = new Lion("Симба");
         Animal parrot = new Parrot("Кеша");
+        Animal snake = new Snake("Каа");
 
-        // Создание сервисов
+        // Создание всех сервисов
         AnimalCare feedingService = new FeedingService();
         AnimalCare medicalService = new MedicalCheckupService();
+        AnimalCare cleaningService = new CleaningService();
 
-        System.out.println("\nСозданы сервисы:");
-        System.out.println("1. FeedingService - сервис кормления");
-        System.out.println("   Тип ухода: " + feedingService.getCareType());
+        System.out.println("\nСозданы все сервисы:");
+        System.out.println("1. " + feedingService.getCareType() + " - кормит животных");
+        System.out.println("2. " + medicalService.getCareType() + " - проводит медосмотры");
+        System.out.println("3. " + cleaningService.getCareType() + " - убирает вольеры");
 
-        System.out.println("\n2. MedicalCheckupService - сервис медосмотров");
-        System.out.println("   Тип ухода: " + medicalService.getCareType());
+        System.out.println("\n--- Работа всех сервисов ---");
 
-        System.out.println("\n--- Демонстрация работы сервисов ---");
-
-        System.out.println("\nКормление льва:");
+        System.out.println("\nКормление всех животных:");
         feedingService.provideCare(lion);
+        feedingService.provideCare(parrot);
+        feedingService.provideCare(snake);
 
-        System.out.println("\nМедосмотр попугая:");
+        System.out.println("\nМедосмотр всех животных:");
+        medicalService.provideCare(lion);
         medicalService.provideCare(parrot);
+        medicalService.provideCare(snake);
 
+        System.out.println("\nУборка в вольерах:");
+        cleaningService.provideCare(lion);
+        cleaningService.provideCare(parrot);
     }
 }
