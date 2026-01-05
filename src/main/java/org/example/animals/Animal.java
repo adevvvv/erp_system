@@ -1,4 +1,4 @@
-package org.example;
+package org.example.animals;
 
 /**
  * Интерфейс Animal представляет базовый контракт для всех животных в зоопарке.

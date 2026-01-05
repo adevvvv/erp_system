@@ -1,4 +1,4 @@
-package org.example;
+package org.example.animals;
 
 /**
  * Класс Parrot представляет попугая в зоопарке.

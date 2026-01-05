@@ -1,4 +1,4 @@
-package org.example;
+package org.example.animals;
 
 /**
  * Класс Lion представляет льва в зоопарке.

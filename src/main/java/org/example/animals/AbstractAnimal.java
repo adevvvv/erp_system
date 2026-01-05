@@ -1,4 +1,4 @@
-package org.example;
+package org.example.animals;
 
 /**
  * Абстрактный класс AbstractAnimal предоставляет базовую реализацию для животных.
