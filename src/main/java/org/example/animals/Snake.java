@@ -1,17 +1,19 @@
 package org.example.animals;
 
+import org.example.exhibitions.Exhibitable;
+
 /**
  * Класс Snake представляет змею в зоопарке.
  * Демонстрирует возможность добавления новых видов животных.
  * Принцип OCP: добавление без изменения существующего кода.
  */
-public class Snake extends AbstractAnimal implements Feedable, MedicalCheckable {
+public class Snake extends AbstractAnimal implements Feedable, MedicalCheckable, Exhibitable {
 
     /**
      * Принцип инкапсуляции: private поле.
      */
     private boolean isHealthy = true;
-    private String medicalRecord = "Запись о здоровье змеи";
+
     public Snake(String name) {
         super(name, "Змея", "Шшшшш!");
     }
@@ -48,6 +50,20 @@ public class Snake extends AbstractAnimal implements Feedable, MedicalCheckable 
     }
     @Override
     public String getMedicalRecord() {
-        return medicalRecord;
+        return "Запись о здоровье змеи";
+    }
+    @Override
+    public boolean canParticipateInExhibition() {
+        return false;
+    }
+
+    @Override
+    public String getExhibitionPreparation() {
+        return "Не участвует в выставках";
+    }
+
+    @Override
+    public void participateInExhibition() {
+        System.out.println(name + " (змея) наблюдает за выставкой из террариума");
     }
 }

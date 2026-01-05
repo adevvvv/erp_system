@@ -3,17 +3,20 @@ package org.example.care;
 import org.example.animals.Animal;
 
 /**
- * Сервис уборки вольеров.
- * Принцип OCP: можно добавлять новые сервисы без изменения существующих.
- * Принцип DIP: реализует интерфейс AnimalCare.
+ * Сервис уборки.
+ * Принцип OCP: можно добавлять новые сервисы.
  */
 public class CleaningService implements AnimalCare {
+
     @Override
     public void provideCare(Animal animal) {
-        System.out.println("Сервис уборки: убрано в вольере " + animal.getName());
+        System.out.println("Уборка территории для: " + animal.getName());
+        System.out.println("Чистим вольер, меняем воду, убираем отходы");
+        System.out.println("Территория " + animal.getName() + " убрана");
     }
+
     @Override
-    public String getCareType() {
+    public String getServiceType() {
         return "Уборка";
     }
 }

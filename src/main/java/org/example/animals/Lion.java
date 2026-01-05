@@ -1,17 +1,19 @@
 package org.example.animals;
 
+import org.example.exhibitions.Exhibitable;
+
 /**
  * Класс Lion представляет льва в зоопарке.
  * Принцип OCP: добавляем новый вид животных без изменения существующего кода.
  * Принцип LSP: может заменять AbstractAnimal без проблем.
  */
-public class Lion extends AbstractAnimal implements Feedable, MedicalCheckable {
+public class Lion extends AbstractAnimal implements Feedable, MedicalCheckable, Exhibitable {
 
     /**
      * Принцип инкапсуляции: private поле.
      */
     private boolean isHealthy = true;
-    private String medicalRecord = "Запись о здоровье льва";
+
     public Lion(String name) {
         super(name, "Лев", "Ррррр!");
     }
@@ -48,6 +50,20 @@ public class Lion extends AbstractAnimal implements Feedable, MedicalCheckable {
     }
     @Override
     public String getMedicalRecord() {
-        return medicalRecord;
+        return "Запись о здоровье льва";
+    }
+    @Override
+    public boolean canParticipateInExhibition() {
+        return true;
+    }
+
+    @Override
+    public String getExhibitionPreparation() {
+        return "Подготовить к выставке: почистить гриву, проверить когти";
+    }
+
+    @Override
+    public void participateInExhibition() {
+        System.out.println(name + " (лев) участвует в выставке больших кошек!");
     }
 }

@@ -5,21 +5,25 @@ import org.example.animals.*;
 /**
  * Сервис кормления животных.
  * Принцип SRP: отвечает только за кормление.
- * Принцип DIP: реализует интерфейс AnimalCare.
  */
 public class FeedingService implements AnimalCare {
+
     @Override
     public void provideCare(Animal animal) {
-        if (animal instanceof Feedable feedableAnimal) {
-            feedableAnimal.feed();
-            System.out.println("Сервис кормления: " + animal.getName() + " покормлен");
+        System.out.println("Начинаем кормление: " + animal.getName());
+
+        if (animal instanceof Feedable feedable) {
+            System.out.print("Меню: " + feedable.getFoodType());
+            System.out.println(", расписание: " + feedable.getFeedingSchedule());
+            feedable.feed();
+            System.out.println(animal.getName() + " успешно покормлен");
         } else {
-            System.out.println("Сервис кормления: " + animal.getName() +
-                    " не может быть покормлен этим сервисом");
+            System.out.println(animal.getName() + " не требует кормления");
         }
     }
+
     @Override
-    public String getCareType() {
+    public String getServiceType() {
         return "Кормление";
     }
 }

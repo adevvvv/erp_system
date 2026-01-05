@@ -1,17 +1,19 @@
 package org.example.animals;
 
+import org.example.exhibitions.Exhibitable;
+
 /**
  * Класс Parrot представляет попугая в зоопарке.
  * Принцип LSP: может заменить AbstractAnimal без проблем.
  * Демонстрирует разное поведение для разных видов.
  */
-public class Parrot extends AbstractAnimal implements Feedable, MedicalCheckable {
+public class Parrot extends AbstractAnimal implements Feedable, MedicalCheckable, Exhibitable {
 
     /**
      * Принцип инкапсуляции: private поле.
      */
     private boolean isHealthy = true;
-    private String medicalRecord = "Запись о здоровье попугая";
+
     public Parrot(String name) {
         super(name, "Попугай", "Чирик-чирик!");
     }
@@ -48,6 +50,20 @@ public class Parrot extends AbstractAnimal implements Feedable, MedicalCheckable
     }
     @Override
     public String getMedicalRecord() {
-        return medicalRecord;
+        return "Запись о здоровье попугая";
+    }
+    @Override
+    public boolean canParticipateInExhibition() {
+        return true;
+    }
+
+    @Override
+    public String getExhibitionPreparation() {
+        return "Подготовить к выставке: почистить перья, проверить способности к разговору";
+    }
+
+    @Override
+    public void participateInExhibition() {
+        System.out.println(name + " (попугай) демонстрирует разговорные навыки на выставке птиц!");
     }
 }
